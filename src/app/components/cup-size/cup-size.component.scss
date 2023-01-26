@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    &__title {
+        width: 100%;
+        letter-spacing: 3px;
+        line-height: 30px;
+        text-align: center;
+        font-weight: 600;
+        color: #673AB7;
+    }
+    &__buttons {
+        display: flex;
+        gap: 30px;
+    }
+}

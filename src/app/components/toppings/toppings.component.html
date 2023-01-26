@@ -1,1 +1,12 @@
-<p>toppings works!</p>
+<div class="container">
+    <p class="container__title">And finally, your toppings</p>
+
+    <div class="container__inner">
+        <div class="container__button" *ngFor="let topping of toppings">
+            <button mat-raised-button color="primary">
+            <mat-icon>remove</mat-icon>
+              {{ topping }}
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+    </div>
