@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Toppings } from 'src/app/models/toppings.enum';
+import { Component, Input } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
+import { Topping } from 'src/app/models/topping.enum';
 
 @Component({
   selector: 'app-toppings',
   templateUrl: './toppings.component.html',
   styleUrls: ['./toppings.component.scss']
 })
-export class ToppingsComponent implements OnInit {
+export class ToppingsComponent {
+  @Input() control!: AbstractControl;
 
-  toppings: string[] = Object.values(Toppings);
+  toppings: string[] = Object.values(Topping);
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

@@ -12,8 +12,19 @@
         font-weight: 600;
         color: #673AB7;
     }
-    &__buttons {
+    &__inner {
         display: flex;
-        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
+    &__button {
+        display: flex;
+        padding: 15px;
+    }
+}
+
+.disabled {
+    background-color: #808080;
+    opacity: 0.6;
 }

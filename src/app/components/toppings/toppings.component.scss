@@ -24,7 +24,9 @@
         align-self: center;
         padding: 15px;
         &__text {
-            margin: 8px 4px;
+            margin: 8px 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
         }
     }
 }

@@ -1,8 +1,10 @@
 <div class="container">
     <p class="container__title">Now, your coffee type</p>
-    <div class="container__buttons">
-        <button mat-raised-button color="primary">Columbian</button>
-        <button mat-raised-button color="primary">Peruvian</button>
-        <button mat-raised-button color="primary">Brazilian</button>
+    <div class="container__inner">
+        <div class="container__button" *ngFor="let type of coffeeTypeOptions">
+            <button mat-raised-button color="primary" [ngClass]=" {'disabled': control.value && control.value !== type}" [value]="type" (click)="selectCoffeeType($event.currentTarget)">
+              {{ type }}
+      </button>
+        </div>
     </div>
 </div>

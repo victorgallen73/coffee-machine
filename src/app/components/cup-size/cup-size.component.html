@@ -1,8 +1,16 @@
 <div class="container">
     <p class="container__title">Choose your coffee size</p>
-    <div class="container__buttons">
-        <button mat-raised-button color="primary">Small</button>
+    <!-- <div class="container__buttons">
+        <button mat-raised-button color="primary">{{ size }}</button>
         <button mat-raised-button color="primary">Medium</button>
         <button mat-raised-button color="primary">Large</button>
+    </div> -->
+
+    <div class="container__inner">
+        <div class="container__button" *ngFor="let size of sizeOptions">
+            <button mat-raised-button color="primary" [ngClass]=" {'disabled': control.value && control.value !== size}" [value]="size" (click)="selectSize($event.currentTarget)">
+              {{ size }}
+            </button>
+        </div>
     </div>
 </div>
