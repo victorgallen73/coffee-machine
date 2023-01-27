@@ -4,9 +4,11 @@
     <div class="container__inner">
         <div class="container__button" *ngFor="let topping of toppings">
             <button mat-raised-button color="primary">
-            <mat-icon>remove</mat-icon>
-              {{ topping }}
-            <mat-icon>add</mat-icon>
-          </button>
+              <mat-icon>remove</mat-icon>
+            </button>
+            <p class="container__button__text">{{ topping }}</p>
+            <button mat-raised-button color="primary">
+              <mat-icon>add</mat-icon>
+            </button>
         </div>
     </div>
