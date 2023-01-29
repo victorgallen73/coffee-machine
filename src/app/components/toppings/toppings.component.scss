@@ -18,6 +18,12 @@
         justify-content: center;
         align-items: center;
     }
+    &__topping {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
     &__button {
         display: flex;
         justify-content: center;

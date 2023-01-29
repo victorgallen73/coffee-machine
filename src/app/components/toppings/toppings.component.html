@@ -1,14 +1,16 @@
 <div class="container">
     <p class="container__title">And finally, your toppings</p>
 
-    <div class="container__inner">
-        <div class="container__button" *ngFor="let topping of toppings">
-            <button mat-raised-button color="primary">
-              <mat-icon>remove</mat-icon>
-            </button>
-            <p class="container__button__text">{{ topping }}</p>
-            <button mat-raised-button color="primary">
+    <div [formGroup]="form" class="container__inner">
+        <div formArrayName="toppings" *ngFor="let topping of toppings.controls; let i=index;">
+            <div class="container__topping" [formGroupName]="i">
+                <button mat-raised-button color="primary" (click)="updateTopping(i, topping.value.topping, false)" [disabled]="topping.value.quantity === 0">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <p class="container__button__text">{{ topping.value.topping }} ({{ topping.value.quantity }})</p>
+                <button mat-raised-button color="primary" (click)="updateTopping(i, topping.value.topping, true)">
               <mat-icon>add</mat-icon>
             </button>
+            </div>
         </div>
     </div>

@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
-import { Topping } from 'src/app/models/topping.enum';
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-toppings',
@@ -8,10 +7,24 @@ import { Topping } from 'src/app/models/topping.enum';
   styleUrls: ['./toppings.component.scss']
 })
 export class ToppingsComponent {
-  @Input() control!: AbstractControl;
+  @Input() form!: FormGroup;
 
-  toppings: string[] = Object.values(Topping);
+  get toppings(): FormArray {
+    return this.form.controls['toppings'] as FormArray;
+  }
 
-  constructor() { }
+  updateTopping(index: number, topping: string, isAddition: boolean) {
+    const formControl = this.toppings.at(index);
+    let quantityUpdated = formControl.value.quantity;
+
+    if (isAddition) {
+      quantityUpdated = quantityUpdated + 1;
+    } else {
+      // Manage if quantity ordered is less than 0
+      quantityUpdated = quantityUpdated - 1 < 0 ? 0 : quantityUpdated - 1;
+    }
+    // Update formControl
+    formControl.patchValue({topping: topping, quantity: quantityUpdated });
+  }
 
 }

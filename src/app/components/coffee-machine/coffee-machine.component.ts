@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Topping } from 'src/app/models/topping.enum';
 
 @Component({
   selector: 'app-coffee-machine',
@@ -9,6 +10,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CoffeeMachineComponent implements OnInit {
 
   coffeeForm!: FormGroup;
+  toppingsEnum: Array<string> = Object.values(Topping);
 
   constructor(private fb: FormBuilder) { }
 
@@ -21,17 +23,30 @@ export class CoffeeMachineComponent implements OnInit {
     this.coffeeForm = this.fb.group({
       size: ['', Validators.required],
       type: ['', Validators.required],
-      toppings: this.fb.array([
-        this.fb.control('')
-      ]),
+      toppings: this.fb.array([]),
     })
+
+    // Add all toppings form groups
+    this.createToppingsFormGroup();
   }
 
-  get toppings() {
+  private createToppingsFormGroup(): void {
+    this.toppingsEnum.forEach(top => {
+      this.toppings.push(
+        this.fb.group({
+          topping: [top],
+          quantity: 0
+        })
+      )
+    });
+  }
+
+  get toppings(): FormArray {
     return this.coffeeForm.controls['toppings'] as FormArray;
   }
 
   orderCoffee() {
+    console.log(this.coffeeForm.getRawValue());
 
   }
 
