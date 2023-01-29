@@ -1,0 +1,51 @@
+.dialog {
+    display: flex;
+    flex-direction: column;
+    &__title {
+        letter-spacing: 4px;
+        text-decoration: underline;
+        margin-bottom: 40px;
+    }
+    &__content {
+        b {
+            letter-spacing: 2px;
+            margin-left: 5px;
+        }
+    }
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0px;
+    }
+    &__total {
+        padding: 10px 0px;
+        font-size: 16px;
+    }
+    &__button {
+        width: 100%;
+    }
+    &__money-buttons {
+        display: flex;
+        justify-content: space-evenly;
+        flex-flow: wrap;
+        button {
+            margin: 5px;
+        }
+    }
+    &__total-paid {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        padding: 20px;
+        gap: 30px;
+        font-size: 20px;
+        span {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            b {
+                margin-left: 5px;
+            }
+        }
+    }
+}

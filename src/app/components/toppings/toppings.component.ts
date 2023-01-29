@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { ToppingOrdered } from 'src/app/models/topping-ordered';
-import { Topping } from 'src/app/models/topping.enum';
 
 @Component({
   selector: 'app-toppings',

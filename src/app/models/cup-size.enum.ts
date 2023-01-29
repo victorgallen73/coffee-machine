@@ -3,7 +3,4 @@ export enum CupSize {
   SMALL = 'Small',
   MEDIUM = 'Medium',
   LARGE = 'Large'
-  // SMALL = '2',
-  // MEDIUM = '3',
-  // LARGE = '3,5'
 }

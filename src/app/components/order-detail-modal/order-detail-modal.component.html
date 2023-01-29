@@ -1,0 +1,50 @@
+<div class="dialog">
+    <h1 mat-dialog-title class="dialog__title">Order #{{data.orderId}}</h1>
+    <div class="dialog__content" mat-dialog-content>
+        <ng-container *ngIf="refund > 0; else notPayedYet">
+            <mat-progress-bar mode="determinate" [value]="progressBarValue"></mat-progress-bar>
+            <p>You have 10 seconds to cancel the order ...</p>
+            <p><b>Amount to be refunded: {{refund}} €</b></p>
+            <button mat-raised-button color="warn" (click)="cancelPayment()">Cancel</button>
+        </ng-container>
+        <ng-template #notPayedYet>
+            <div class="dialog__item">
+                <span>Size: <b>{{data.size}}</b></span>
+                <span><b>{{priceList.get(data.size)}} €</b></span>
+            </div>
+            <div class="dialog__item">
+                <span>Type: <b>{{data.type}}</b></span>
+                <span><b>{{priceList.get(data.type)}} €</b></span>
+            </div>
+
+            <span>Toppings: </span>
+            <div *ngFor="let topping of data.toppings">
+                <div class="dialog__item" *ngIf="topping.quantity > 0">
+                    <span><b>{{topping.quantity}} * {{topping.name}} ({{priceList.get(topping.name)}}€)</b></span>
+                    <span><b>{{priceList.get(topping.name) * topping.quantity}} €</b></span>
+                </div>
+            </div>
+            <p class="dialog__total">Total amount: <b>{{data.price}} €</b></p>
+
+            <div>
+                <button *ngIf="!showMoneyButtons" class="dialog__button" mat-raised-button color="primary" (click)="proceedToPayment()">
+                OK! Let's pay it!
+                <mat-icon>attach_money</mat-icon>
+              </button>
+                <div *ngIf="showMoneyButtons">
+                    <div class="dialog__money-buttons">
+                        <button mat-raised-button color="accent" value="1" (click)="incrementAmount($event.currentTarget)">1€</button>
+                        <button mat-raised-button color="accent" value="2" (click)="incrementAmount($event.currentTarget)">2€</button>
+                        <button mat-raised-button color="accent" value="5" (click)="incrementAmount($event.currentTarget)">5€</button>
+                        <button mat-raised-button color="accent" value="10" (click)="incrementAmount($event.currentTarget)">10€</button>
+                    </div>
+                    <div class="dialog__total-paid">
+                        <span>Total introduced: <b>{{totalIntroduced}} €</b></span>
+                        <button mat-raised-button color="primary" value="1" [disabled]="isPayButtonDisabled" (click)="pay()">Pay!</button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+
+</div>

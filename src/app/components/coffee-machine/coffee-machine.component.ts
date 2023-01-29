@@ -3,6 +3,11 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Topping } from 'src/app/models/topping.enum';
 import { Coffee } from '../../models/coffee';
 import { priceList } from '../../data/price-list';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { OrderDetailModalComponent } from '../order-detail-modal/order-detail-modal.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Order } from '../../models/order';
+import { OrderStatus } from 'src/app/models/order-status.enum';
 
 @Component({
   selector: 'app-coffee-machine',
@@ -13,13 +18,17 @@ export class CoffeeMachineComponent implements OnInit {
 
   coffeeForm!: FormGroup;
   toppingsEnum: Array<string> = Object.values(Topping);
+  childDialogRef: any;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.createForm();
   }
-
 
   private createForm() {
     this.coffeeForm = this.fb.group({
@@ -48,8 +57,10 @@ export class CoffeeMachineComponent implements OnInit {
   }
 
   orderCoffee() {
-    const coffee = new Coffee(this.coffeeForm.getRawValue());
+    let coffee = new Coffee(this.coffeeForm.getRawValue());
     coffee.price = this.calculatePrice(coffee);
+    coffee.orderId = this.generateRandomOrderId();
+    this.openDialog(coffee);
   }
 
   /**
@@ -70,6 +81,37 @@ export class CoffeeMachineComponent implements OnInit {
     return totalAmount;
   }
 
+  private generateRandomOrderId(): string {
+    const dateStr = Date
+      .now()
+      .toString(36); // convert num to base 36 and stringify
 
+    const randomStr = Math
+      .random()
+      .toString(36)
+      .substring(2, 8); // start at index 2 to skip decimal point
+
+    return `${dateStr}-${randomStr}`;
+  }
+
+  private openDialog(coffee: Coffee) {
+    this.childDialogRef = this.dialog.open(OrderDetailModalComponent, {
+      data: coffee,
+      height: '500px',
+      width: '400px',
+    });
+    this.childDialogRef.afterClosed().subscribe((order: Order) => {
+      this.childDialogRef = null;
+      if (order.status === OrderStatus.CANCELLED) {
+        this.openSnackBar('Order #' + order?.coffee?.orderId + ' has been canceled')
+      } else {
+        this.openSnackBar('Order #' + order?.coffee?.orderId + ' is being prepared')
+      }
+    });
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'OK',{duration: 5000});
+  }
 
 }

@@ -9,12 +9,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
 
 import { CoffeeMachineComponent } from './components/coffee-machine/coffee-machine.component';
 import { CupSizeComponent } from './components/cup-size/cup-size.component';
 import { CoffeeTypeComponent } from './components/coffee-type/coffee-type.component';
 import { ToppingsComponent } from './components/toppings/toppings.component';
+import { OrderDetailModalComponent } from './components/order-detail-modal/order-detail-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,8 @@ import { ToppingsComponent } from './components/toppings/toppings.component';
     CupSizeComponent,
     CoffeeMachineComponent,
     CoffeeTypeComponent,
-    ToppingsComponent
+    ToppingsComponent,
+    OrderDetailModalComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +37,10 @@ import { ToppingsComponent } from './components/toppings/toppings.component';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatButtonToggleModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
