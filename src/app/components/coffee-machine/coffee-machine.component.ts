@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Topping } from 'src/app/models/topping.enum';
 import { Coffee } from '../../models/coffee';
 import { priceList } from '../../data/price-list';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { OrderDetailModalComponent } from '../order-detail-modal/order-detail-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Order } from '../../models/order';
