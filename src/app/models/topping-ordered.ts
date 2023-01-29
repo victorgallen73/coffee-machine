@@ -1,11 +1,11 @@
 import { Topping } from "./topping.enum";
 
 export class ToppingOrdered {
-  topping: Topping | null;
+  name: Topping | string;
   quantity: number;
 
   constructor(toppingOrdered: ToppingOrdered) {
-    this.topping = toppingOrdered?.topping ? toppingOrdered?.topping : null;
+    this.name = toppingOrdered?.name ? toppingOrdered?.name : '';
     this.quantity = toppingOrdered?.quantity ? toppingOrdered?.quantity : 0;
   }
 

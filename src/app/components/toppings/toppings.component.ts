@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
+import { ToppingOrdered } from 'src/app/models/topping-ordered';
+import { Topping } from 'src/app/models/topping.enum';
 
 @Component({
   selector: 'app-toppings',
@@ -24,7 +26,8 @@ export class ToppingsComponent {
       quantityUpdated = quantityUpdated - 1 < 0 ? 0 : quantityUpdated - 1;
     }
     // Update formControl
-    formControl.patchValue({topping: topping, quantity: quantityUpdated });
+    // const newTopping = new ToppingOrdered({ name: topping, quantity: quantityUpdated })
+    formControl.get('quantity')?.patchValue(quantityUpdated);
   }
 
 }

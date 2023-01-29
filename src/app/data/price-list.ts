@@ -2,7 +2,7 @@ import { CoffeeType } from "../models/coffee-type.enum";
 import { CupSize } from "../models/cup-size.enum";
 import { Topping } from "../models/topping.enum";
 
-export const priceList = new Map<string, number>([
+export const priceList = new Map<any,any>([
   [CupSize.SMALL, 2 ],
   [CupSize.MEDIUM, 3 ],
   [CupSize.LARGE, 3.5 ],

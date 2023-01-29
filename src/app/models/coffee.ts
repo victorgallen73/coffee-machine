@@ -1,17 +1,17 @@
 import { CoffeeType } from "./coffee-type.enum";
 import { CupSize } from "./cup-size.enum";
-import { Topping } from "./topping.enum";
+import { ToppingOrdered } from "./topping-ordered";
 
 export class Coffee {
-  size: CupSize | null;
-  type: CoffeeType | null;
-  toppings: Topping[] | null;
+  size: CupSize;
+  type: CoffeeType;
+  toppings: ToppingOrdered[];
   price: number;
 
   constructor(coffee: Coffee) {
-    this.size = coffee?.size ? coffee?.size : null;
-    this.type = coffee?.type ? coffee?.type : null;
-    this.toppings = coffee?.toppings ? coffee?.toppings : null;
+    this.size = coffee?.size ? coffee?.size : CupSize.SMALL;
+    this.type = coffee?.type ? coffee?.type : CoffeeType.COLUMBIAN;
+    this.toppings = coffee?.toppings ? coffee?.toppings : [];
     this.price = coffee?.price ? coffee?.price : 0;
   }
 
