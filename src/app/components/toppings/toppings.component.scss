@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    &__title {
+        width: 100%;
+        letter-spacing: 3px;
+        line-height: 30px;
+        text-align: center;
+        font-weight: 600;
+        color: #673AB7;
+    }
+    &__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    &__topping {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+    &__button {
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        padding: 15px;
+        &__text {
+            margin: 8px 10px;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+    }
+}

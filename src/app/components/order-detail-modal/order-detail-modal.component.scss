@@ -1,0 +1,62 @@
+.dialog {
+    display: flex;
+    flex-direction: column;
+    &__title {
+        letter-spacing: 4px;
+        text-decoration: underline;
+        margin-bottom: 40px;
+    }
+    &__content {
+        b {
+            letter-spacing: 2px;
+            margin-left: 5px;
+        }
+    }
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0px;
+    }
+    &__total {
+        padding: 10px 0px;
+        font-size: 16px;
+    }
+    &__actions {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    &__button {
+        &-edit {
+            background-color: #2e805e;
+            color: #fff;
+        }
+    }
+    &__money-buttons {
+        display: flex;
+        justify-content: space-evenly;
+        flex-flow: wrap;
+        button {
+            margin: 5px;
+            color: white;
+            background-color: #075766;
+            letter-spacing: 2px;
+        }
+    }
+    &__total-paid {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        padding: 20px;
+        gap: 30px;
+        font-size: 20px;
+        span {
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            b {
+                margin-left: 5px;
+            }
+        }
+    }
+}
