@@ -27,10 +27,16 @@
             <p class="dialog__total">Total amount: <b>{{data.price}} €</b></p>
 
             <div>
-                <button *ngIf="!showMoneyButtons" class="dialog__button" mat-raised-button color="primary" (click)="proceedToPayment()">
-                OK! Let's pay it!
-                <mat-icon>attach_money</mat-icon>
-              </button>
+                <div class="dialog__actions">
+                    <button *ngIf="!showMoneyButtons" class="dialog__button-edit" mat-raised-button (click)="editOrder()">
+                  Edit order
+                  <mat-icon>edit</mat-icon>
+                </button>
+                    <button *ngIf="!showMoneyButtons" class="dialog__button" mat-raised-button color="primary" (click)="proceedToPayment()">
+                  OK! Let's pay it!
+                  <mat-icon>attach_money</mat-icon>
+                </button>
+                </div>
                 <div *ngIf="showMoneyButtons">
                     <div class="dialog__money-buttons">
                         <button mat-raised-button color="accent" value="1" (click)="incrementAmount($event.currentTarget)">1€</button>

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Coffee } from 'src/app/models/coffee';
 import { priceList } from '../../data/price-list';
@@ -11,7 +11,7 @@ import { OrderStatus } from 'src/app/models/order-status.enum';
   templateUrl: './order-detail-modal.component.html',
   styleUrls: ['./order-detail-modal.component.scss']
 })
-export class OrderDetailModalComponent {
+export class OrderDetailModalComponent implements OnInit {
 
   priceList = priceList;
 
@@ -33,6 +33,7 @@ export class OrderDetailModalComponent {
   proceedToPayment() {
     this.showMoneyButtons = true;
   }
+
   incrementAmount(event: any) {
     this.totalIntroduced = this.totalIntroduced + +event.value;
 
@@ -41,16 +42,30 @@ export class OrderDetailModalComponent {
     }
   }
 
+  ngOnInit(): void {
+    this.order = new Order({coffee: this.data, refund: this.refund});
+  }
+
+  editOrder() {
+   this.order.status = OrderStatus.EDITING;
+
+   this.closeDialog()
+  }
+
   pay() {
     this.refund = this.totalIntroduced - this.data?.price;
-    this.order = new Order({coffee: this.data, refund: this.refund, status: OrderStatus.APPROVED});
+
+    //Update order refund and status
+    this.order.refund = this.refund;
+    this.order.status = OrderStatus.APPROVED;
+
     this.startTimer();
   }
 
   cancelPayment() {
     this.subscription.unsubscribe();
     this.order.status = OrderStatus.CANCELLED;
-    this.parentDialogRef.close(this.order);
+    this.closeDialog();
   }
 
   startTimer() {
@@ -62,8 +77,12 @@ export class OrderDetailModalComponent {
 
       if (this.curSec === 10) {
         this.subscription.unsubscribe();
-        this.parentDialogRef.close(this.order);
+        this.closeDialog();
       }
     });
+  }
+
+  closeDialog() {
+    this.parentDialogRef.close(this.order);
   }
 }

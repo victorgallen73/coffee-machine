@@ -21,8 +21,16 @@
         padding: 10px 0px;
         font-size: 16px;
     }
+    &__actions {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
     &__button {
-        width: 100%;
+        &-edit {
+            background-color: #2e805e;
+            color: #fff;
+        }
     }
     &__money-buttons {
         display: flex;
@@ -30,6 +38,9 @@
         flex-flow: wrap;
         button {
             margin: 5px;
+            color: white;
+            background-color: #075766;
+            letter-spacing: 2px;
         }
     }
     &__total-paid {

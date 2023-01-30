@@ -6,8 +6,8 @@ import { priceList } from '../../data/price-list';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderDetailModalComponent } from '../order-detail-modal/order-detail-modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Order } from '../../models/order';
 import { OrderStatus } from 'src/app/models/order-status.enum';
+import { Order } from 'src/app/models/order';
 
 @Component({
   selector: 'app-coffee-machine',
@@ -32,6 +32,7 @@ export class CoffeeMachineComponent implements OnInit {
 
   private createForm() {
     this.coffeeForm = this.fb.group({
+      orderId: [''],
       size: ['', Validators.required],
       type: ['', Validators.required],
       toppings: this.fb.array([]),
@@ -59,7 +60,11 @@ export class CoffeeMachineComponent implements OnInit {
   orderCoffee() {
     let coffee = new Coffee(this.coffeeForm.getRawValue());
     coffee.price = this.calculatePrice(coffee);
-    coffee.orderId = this.generateRandomOrderId();
+    // If we have not orderId is because we are ordering a new one. Else, it is an edition
+    if (this.coffeeForm.controls['orderId'].value === '') {
+      coffee.orderId = this.generateRandomOrderId();
+    }
+
     this.openDialog(coffee);
   }
 
@@ -99,13 +104,16 @@ export class CoffeeMachineComponent implements OnInit {
       data: coffee,
       height: '500px',
       width: '400px',
+      disableClose: true
     });
     this.childDialogRef.afterClosed().subscribe((order: Order) => {
       this.childDialogRef = null;
       if (order.status === OrderStatus.CANCELLED) {
-        this.openSnackBar('Order #' + order?.coffee?.orderId + ' has been canceled')
+        this.openSnackBar('Order #' + order?.coffee?.orderId + ' has been canceled');
+      } else if (order.status === OrderStatus.EDITING && order.coffee) {
+        this.coffeeForm.patchValue(order.coffee);
       } else {
-        this.openSnackBar('Order #' + order?.coffee?.orderId + ' is being prepared')
+        this.openSnackBar('Order #' + order?.coffee?.orderId + ' is being prepared');
       }
     });
   }
